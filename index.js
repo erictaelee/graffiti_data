@@ -2,7 +2,19 @@
 axios.get("https://data.cityofchicago.org/resource/hec5-y4x5.json")
   .then(function (response) {
     // handle success
-    console.log(response);
+    // console.log(response.data);
+    let tally = {};
+    for (let removalRequest of response.data) {
+      // console.log(removalRequest)
+      let wardNumber = removalRequest.ward;
+      // console.log(wardNumber);
+      if (tally[wardNumber]) {
+        tally[wardNumber]++;
+      } else {
+        tally[wardNumber] = 1;
+      }
+    }
+    console.log(tally);
   })
   .catch(function (error) {
     // handle error
